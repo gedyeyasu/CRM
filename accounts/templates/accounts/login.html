@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CRM</title>
+    <!-- CSS only -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+<!-- JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <style>
+        body,html{
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: #7abecc !important;
+        }
+        .user_card{
+            width: 350px;
+            margin-top: 50px;
+            margin-bottom: auto;
+            background: #74cfbf;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            padding: 10px;
+            border-radius: 5px;
+
+        }
+        .form_container{
+            margin-top: 20px;
+        }
+        #form-title{
+            color: white;
+        }
+        .login_btn{
+            width: 100%;
+            background: #33ccff !important;
+            color: white !important;
+        }
+        .login_container{
+            padding: 0 2rem;
+        }
+        .input-group-text{
+            background: #f7ba5b !important;
+            color: white !important;
+            border: 0 !important;
+            border-radius: 0.25rem 0 0 0.25rem !important;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="container h-100">
+    <div class="d-flex justify-content-center">
+        <div class="user_card">
+            <div class="d-flex justify-content-center">
+                <h3 id="form-title">Log In</h3>
+            </div>
+            <div class="d-flex justify-content-center form_container">
+
+                <form method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+                    <div class="input-group mb-3">
+                         <div class="input-group-append">
+                             <span class="input-group-text">
+                                 <i class="fa fa-user"></i>
+                             </span>
+                         </div>
+                        <input class="form-control" name="username" type="text"  placeholder="username">
+                     </div>
+                     <div class="input-group mb-2">
+                         <div class="input-group-append">
+                             <span class="input-group-text">
+                                 <i class="fas fa-key"></i>
+                             </span>
+                         </div>
+                         <input class="form-control" name="password" type="password" placeholder="password">
+                     </div>
+                     <div class="d-flex justify-content-center mt-3 login_container">
+                         <input class="btn login_btn" type="submit" value="Log In">
+                    </div>
+                </form>
+            </div>
+            {% for message in messages %}
+                <p id="message">{{ message }}</p>
+            {% endfor %}
+            <div class="mt-4">
+                <div class="d-flex justify-content-center links">
+                    Don't have an account? <a href="{% url 'register' %}" class="ml-2">Create Account</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
