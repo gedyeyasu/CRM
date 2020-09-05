@@ -41,3 +41,59 @@ def admin_only(view_func):
         else:
             return HttpResponse("Your don't have permission please contact admin")
     return wrapper_func
+def is_admin_only(view_func):
+    def wrapper_func(request, *args, **kwargs):
+        group = None
+        if request.user.groups.exists():
+            list = request.user.groups.all()
+            print("groups: ", list)
+            group = request.user.groups.all()[0].name
+        if group == 'customers':
+            return redirect('user')
+        elif group == 'admins':
+            return view_func(request, *args, **kwargs)
+        else:
+            return HttpResponse("Your don't have permission please contact admin")
+    return wrapper_func
+def is_user_only(view_func):
+    def wrapper_func(request, *args, **kwargs):
+        group = None
+        if request.user.groups.exists():
+            list = request.user.groups.all()
+            print("groups: ", list)
+            group = request.user.groups.all()[0].name
+        if group == 'customers':
+            return redirect('user')
+        elif group == 'admins':
+            return view_func(request, *args, **kwargs)
+        else:
+            return HttpResponse("Your don't have permission please contact admin")
+    return wrapper_func
+def is_manager_only(view_func):
+    def wrapper_func(request, *args, **kwargs):
+        group = None
+        if request.user.groups.exists():
+            list = request.user.groups.all()
+            print("groups: ", list)
+            group = request.user.groups.all()[0].name
+        if group == 'customers':
+            return redirect('user')
+        elif group == 'admins':
+            return view_func(request, *args, **kwargs)
+        else:
+            return HttpResponse("Your don't have permission please contact admin")
+    return wrapper_func
+def belongs_to_group(view_func):
+    def wrapper_func(request, *args, **kwargs):
+        group = None
+        if request.user.groups.exists():
+            list = request.user.groups.all()
+            print("groups: ", list)
+            group = request.user.groups.all()[0].name
+        if group == 'customers':
+            return redirect('user')
+        elif group == 'admins':
+            return view_func(request, *args, **kwargs)
+        else:
+            return HttpResponse("Your don't have permission please contact admin")
+    return wrapper_func
